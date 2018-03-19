@@ -2,7 +2,7 @@
   "name": "rupture-sass",
   "version": "0.1.1",
   "description": "Simple media queries for SASS",
-  "main": "index.scss",
+  "main": "rupture.scss",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CubaSAN/rupture-sass.git"
