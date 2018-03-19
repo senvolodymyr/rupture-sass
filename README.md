@@ -61,7 +61,6 @@ API Documentation
 
 ```scss
 $rupture: (
-  rasterise-media-queries: false,
   mobile-cutoff: 400px,
   desktop-cutoff: 1050px,
   hd-cutoff: 1800px,
@@ -70,30 +69,31 @@ $rupture: (
   anti-overlap: false,
   density-queries: 'dppx' 'webkit' 'moz' 'dpi',
   retina-density: 1.5,
-  use-device-width: false
+  use-device-width: false,
+  rasterise-media-queries: false,
 );
 ```
 
-In order to override any value use ```$rupture: map-merge($rupture, (key, value, ..., keyN, valueN)```
+In order to override any value use ```$rupture: map-merge($rupture, (key: value, ..., keyN: valueN)```
 
 ```scss
 // e.g.
 $rupture: map-merge($rupture, (
-  mobile-cutoff: 320px,
-  desktop-cutoff: 1366px
+  mobile-cutoff: 767px,
+  desktop-cutoff: 1365px
 ));
 ```
 
 ##### mobile-cutoff
-Pixel value where the `mobile` mixin kicks in, also the lower bound of the `tablet` mixin.
+Upper bound where `mobile()` mixin has an effect and lower bound of the `tablet()` mixin.
 
 ##### desktop-cutoff
-Pixel value where the `desktop` mixin kicks in, also the upper bound of the `tablet` mixin.
+Lower bound where `desktop()` mixin has an effect and upper bound of the `tablet()` mixins.
 
 ##### hd-cutoff
-Pixel value where the `hd` mixin kicks in, meaning a wider desktop-screen.
+Lower bound where `hd()` mixin starts to have an affect
 
-##### scale
+<!-- ##### scale
 A list of values that you can reference by index in most of the mixins listed below. This works exactly like [breakpoint-slicer](https://github.com/lolmaus/breakpoint-slicer). Default looks like this:
 ```
 scale: 0 400px 600px 800px 1050px 1800px
@@ -110,4 +110,4 @@ scale-names:               'xs'        's'         'm'         'l'         'xl' 
 
 ##### enable-em-breakpoints
 Enables Rupture's [PX to EM unit conversion](#px-to-em-unit-conversion) feature. If set to true, pixel breakpoint values will be automatically converted into em values.
-
+ -->
