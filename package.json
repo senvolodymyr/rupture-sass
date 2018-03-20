@@ -1,6 +1,6 @@
 {
   "name": "rupture-sass",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Simple media queries for SASS",
   "main": "rupture.scss",
   "repository": {
