@@ -92,13 +92,13 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
 
 @function _overlap-shift($anti-overlap, $n) {
   $shift-unit: unit(_number($n));
-  @if ($anti-overlap) {
-    $anti-overlap: 1px;
-  }
-  @else {
+  @if not $anti-overlap {
     $anti-overlap: 0px;
   }
-  @if (length(anti-overlap)==1) {
+  @if ($anti-overlap==true) {
+    $anti-overlap: 1px;
+  }
+  @if (length($anti-overlap)==1) {
     @return _convert-to($shift-unit, $anti-overlap);
   }
   @each $val in $anti-overlap {

@@ -65,12 +65,10 @@ $rupture: (
   desktop-cutoff: 1050px,
   hd-cutoff: 1800px,
   enable-em-breakpoints: false, 
-  base-font-size: 16px,
   anti-overlap: false,
   density-queries: 'dppx' 'webkit' 'moz' 'dpi',
   retina-density: 1.5,
-  use-device-width: false,
-  rasterise-media-queries: false,
+  use-device-width: false
 );
 ```
 
@@ -79,8 +77,8 @@ In order to override any value use ```$rupture: map-merge($rupture, (key: value,
 ```scss
 // e.g.
 $rupture: map-merge($rupture, (
-  mobile-cutoff: 767px,
-  desktop-cutoff: 1365px
+  mobile-cutoff: 768px,
+  desktop-cutoff: 1366px
 ));
 ```
 
@@ -93,21 +91,54 @@ Lower bound where `desktop()` mixin has an effect and upper bound of the `tablet
 ##### hd-cutoff
 Lower bound where `hd()` mixin starts to have an affect
 
-<!-- ##### scale
-A list of values that you can reference by index in most of the mixins listed below. This works exactly like [breakpoint-slicer](https://github.com/lolmaus/breakpoint-slicer). Default looks like this:
-```
-scale: 0 400px 600px 800px 1050px 1800px
-```
-##### scale-names
-A list of strings you can reference that correspond to their index location in `scale`. This works exactly like [breakpoint-slicer](https://github.com/lolmaus/breakpoint-slicer#calling-slices-by-names-rather-than-numbers)
-
-```
-scale:                      0         400px       600px       800px       1050px     1800px
-//                     └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘ └────┬────
-// Slice numbers:           1           2           3           4           5           6
-scale-names:               'xs'        's'         'm'         'l'         'xl'        'hd'
-```
-
 ##### enable-em-breakpoints
-Enables Rupture's [PX to EM unit conversion](#px-to-em-unit-conversion) feature. If set to true, pixel breakpoint values will be automatically converted into em values.
- -->
+Convert pixel values into EM's values
+```scss
+@include below(768px) {/*...*/};
+// Compiles to:
+// @media only screen and (max-width: 48em) {...}
+```
+
+##### anti-overlap
+Fixes overlaped boundaries of two or more media queries, for example we might have
+```css
+@media only screen and (max-width: 48em) {/*...*/}
+@media only screen and (min-width: 48em) {/*...*/}
+```
+in this case, when screen size is exactly ```48em's``` or ```768px``` two media queries will be
+applied to selector, in order to prevent this override the ```anti-overlap``` value
+```scss
+$rupture: map-merge($rupture, (
+  anti-overlap: true
+));
+// Resolves to:
+@media only screen and (max-width: 48em) {/*...*/}
+@media only screen and (min-width: 48.0625em) {/*...*/}
+```
+By default adjustement happens with ```+1px``` value or ```+0.0625em if``` ```enable-em-breakpoints``` is ```true```, also specific values might be assigned
+```scss
+anti-overlap: false // default value
+anti-overlap: true // enables 1px (or em equivalent) overlap correction globally
+anti-overlap: 0px // same as anti-overlap = false
+anti-overlap: 1px // same as anti-overlap = true
+anti-overlap: -1px // negative offsets decrease the `max-width` arguments
+anti-overlap: 0.001em // positive offsets increase the `min-width` arguments
+anti-overlap: 1px 0.0625em 0.0625rem // explicit relative values will be used if they are provided instead of calculating them from the font size
+```
+
+##### density-queries
+
+Set of vendor prefixes for generating vendor specific density media queries. Valid values are 'webkit', 'moz', 'o', 'ratio', 'dpi', and 'dppx'
+Used in ```density()``` and ```retina()``` mixins as well as when ```$density``` or ```$retina``` specified as parameter
+```scss
+div {
+  @include density(2) {/*...*/}
+}
+// Compiles to
+// @media only screen and (min-resolution: 2dppx),
+// only screen and (-webkit_min-device-pixel-ratio: 2),
+// only screen and (min--moz-device-pixel-ratio: 2),
+// only screen and (min-resolution: 192dpi) {
+//   div {/*...*/}
+// }
+```
