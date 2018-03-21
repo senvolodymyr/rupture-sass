@@ -298,5 +298,5 @@ Compiles to:
 
 ### Miscellaneous
 
-Inspired by [Rupture](http://jescalan.github.io/rupture/). mixins lib for Stylus
+Inspired by [Rupture](http://jescalan.github.io/rupture/) mixins lib for Stylus
 
