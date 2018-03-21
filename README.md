@@ -272,4 +272,31 @@ Add a media query for screen when the viewport is taller than it is wide or in p
 
 Add media queries for devices with hover over element's ability
 
+#### Mixins Arguments
+
+Almost all mixins receive parameters to make media query more specific.
+Following parameters are: ```$scale-point```, ```$anti-overlap```, ```$density```, ```$orientation```, ```$use-device-width```, ```$fallback-class``` and can be added to mixin separately.
+```scss
+div {
+  @include above(32em, $orientation: portrait, $fallback-class: '.tablet-portrait') {
+    color: red;
+  }
+}
+```
+Compiles to:
+```css
+@media only screen and (min-width: 32em) and (orientation: portrait) {
+  div {
+    color: red;
+  }
+}
+
+.tablet-portrait div {
+  color: red;
+}
+```
+
+### Miscellaneous
+
+Inspired by [Rupture](http://jescalan.github.io/rupture/). mixins lib for Stylus
 
