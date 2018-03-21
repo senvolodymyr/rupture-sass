@@ -175,7 +175,7 @@ Then you can reference index in mixins, like:
 // @media only screen and (min-width: 400px) and (max-width: 600px) {}
 ```
 
-### scale-names
+#### scale-names (list)
 A list of string reppresentation for indexes in ```scale``` property
 ```scss
 $rupture: map-merge($rupture, (
@@ -194,3 +194,82 @@ scale-names:               'xs'        's'         'm'         'l'         'xl' 
 // Compiles to:
 // @media only screen and (min-width: 400px) and (max-width: 600px) {}
 ```
+
+### Mixins
+
+#### above(value)
+
+Media query kicks in above the specified value, index or scale name
+
+#### from-width(value)
+
+Alias to ```above()```
+
+#### below(value)
+
+Media query kicks in below the specified value, index or scale name
+
+#### to-width(value)
+
+Alias to ```below()```
+
+#### between(minVal, maxVal)
+
+Media query takes an affect between ```minVal``` and ```maxVal``` value, index or scale name
+
+#### at(value)
+
+Used for specifying media query only at exact index or scale-name
+```scss
+@include at(s) {/*...*/}
+// Compiles to:
+// @media only screen and (min-width: 400px) and (max-width: 600px) {}
+```
+Has no reason with ```px```, ```em``` or ```rem``` values
+
+#### mobile()
+Media query for screens width like mobile, by default from ```0``` till ```400px```, upper bound could be changed with ```mobile-cutoff```
+
+#### tablet()
+Media query for screens width like tablet, by default from ```400px``` till ```1050px```, lower bound could be changed with ```mobile-cutoff``` and upper bound with ```desktop-cutoff```
+
+#### desktop()
+Media query for desktop like screens, by default from ```1050px``` and above, lower bound could be changed with ```desktop-cutoff```
+
+#### hd()
+Media query for large screens, by default from ```1800px``` and above, lower bound could be changed with ```hd-cutoff```
+
+#### density(number)
+Media query for specific device pixel density, possible values ```1.5```, ```2```
+```scss
+div {
+  @include density(2) {/*...*/}
+}
+```
+Compiles to:
+```css
+@media only screen and (min-resolution: 2dppx), /* dppx */
+only screen and (-webkit_min-device-pixel-ratio: 2), /* webkit */
+only screen and (min--moz-device-pixel-ratio: 2), /* moz */
+only screen and (min-resolution: 192dpi) { /* dpi */
+    div {/*...*/}
+}
+```
+
+#### retina()
+
+Add ```density``` media queries with ```retina-density```, default retina density is ```1.5``` but migth be changed with ```retina-density```
+
+#### landscape()
+
+Add a media query for screen when the viewport is wider than it is tall or in landscape mode
+
+#### portrait()
+
+Add a media query for screen when the viewport is taller than it is wide or in portrait mode
+
+#### hover()
+
+Add media queries for devices with hover over element's ability
+
+
