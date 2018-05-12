@@ -272,6 +272,10 @@ Add a media query for screen when the viewport is taller than it is wide or in p
 
 Add media queries for devices with hover over element's ability
 
+#### touch()
+
+Add media queries for devices with touch only ability
+
 #### Mixins Arguments
 
 Almost all mixins receive parameters to make media query more specific.
