@@ -353,3 +353,16 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
     @content;
   }
 }
+
+@mixin rupture-touch($density: null, $orientation: null, $fallback-class: null) {
+  $condition: 'only screen and (hover: none)';
+  @media #{$condition} {
+    @content;
+  }
+}
+
+@mixin touch($args...) {
+  @include rupture-touch($args...) {
+    @content;
+  }
+}
