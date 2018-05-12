@@ -205,13 +205,21 @@ Media query kicks in above the specified value, index or scale name
 
 Alias to ```above()```
 
+#### from(value)
+
+Alias to ```above()``` using breakpoint-slicer syntax
+
 #### below(value)
 
 Media query kicks in below the specified value, index or scale name
 
-#### to-width(value)
+#### to-width(value) 
 
 Alias to ```below()```
+
+#### to(value) 
+
+Alias to ```below()``` using breakpoint-slicer syntax
 
 #### between(minVal, maxVal)
 
