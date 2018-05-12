@@ -312,3 +312,7 @@ Compiles to:
 
 Inspired by [Rupture](http://jescalan.github.io/rupture/) mixins lib for Stylus
 
+### Thanks
+
+[elgandoz](https://github.com/elgandoz) for contributing
+
