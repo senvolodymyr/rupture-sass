@@ -205,13 +205,21 @@ Media query kicks in above the specified value, index or scale name
 
 Alias to ```above()```
 
+#### from(value)
+
+Alias to ```above()``` using breakpoint-slicer syntax
+
 #### below(value)
 
 Media query kicks in below the specified value, index or scale name
 
-#### to-width(value)
+#### to-width(value) 
 
 Alias to ```below()```
+
+#### to(value) 
+
+Alias to ```below()``` using breakpoint-slicer syntax
 
 #### between(minVal, maxVal)
 
@@ -271,6 +279,10 @@ Add a media query for screen when the viewport is taller than it is wide or in p
 #### hover()
 
 Add media queries for devices with hover over element's ability
+
+#### touch()
+
+Add media queries for devices with touch only ability
 
 #### Mixins Arguments
 

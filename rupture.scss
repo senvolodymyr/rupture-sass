@@ -227,6 +227,12 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
   }
 }
 
+@mixin from($args...) {
+  @include from-width($args...) {
+    @content;
+  }
+}
+
 @mixin to-width($scale-point, $anti-overlap: map-get($rupture, anti-overlap), $density: null, $orientation: null, $use-device-width: map-get($rupture, use-device-width), $fallback-class: null) {
   @include between(1, $scale-point, $anti-overlap, $density, $orientation, $use-device-width, $fallback-class) {
     @content;
@@ -234,6 +240,12 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
 }
 
 @mixin below($args...) {
+  @include to-width($args...) {
+    @content;
+  }
+}
+
+@mixin to($args...) {
   @include to-width($args...) {
     @content;
   }
@@ -350,6 +362,19 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
 
 @mixin hover($args...) {
   @include rupture-hover($args...) {
+    @content;
+  }
+}
+
+@mixin rupture-touch($density: null, $orientation: null, $fallback-class: null) {
+  $condition: 'only screen and (hover: none)';
+  @media #{$condition} {
+    @content;
+  }
+}
+
+@mixin touch($args...) {
+  @include rupture-touch($args...) {
     @content;
   }
 }
