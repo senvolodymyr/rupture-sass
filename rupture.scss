@@ -1,3 +1,4 @@
+@use "sass:math";
 $base-font-size: 16px !default;
 $rasterise-media-queries: false !default;
 $rupture: ( rasterise-media-queries: $rasterise-media-queries, mobile-cutoff: 400px, desktop-cutoff: 1050px, hd-cutoff: 1800px, enable-em-breakpoints: false, base-font-size: $base-font-size, anti-overlap: false, density-queries: 'dppx' 'webkit' 'moz' 'dpi', retina-density: 1.5, use-device-width: false);
@@ -37,7 +38,7 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
     }
     @else {
       $digits: $digits * 10;
-      $result: $result + map-get($numbers, $character) / $digits;
+      $result: $result + math.div(map-get($numbers, $character), $digits);
     }
   }
   @return if($minus, -$result, $result);
@@ -46,7 +47,7 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
 
 @function _strip-units($number) {
   $number: _number($number);
-  @return $number / ($number * 0 + 1);
+  @return math.div($number, $number * 0 + 1);
 }
 
 @function _is-string($val) {
@@ -71,7 +72,7 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
     @if ($from-unit=='em' or $from-unit=='rem') {
       @return $value;
     }
-    @return "#{_strip-units($value) / _strip-units($context)}#{$to-unit}";
+    @return "#{math.div(_strip-units($value), _strip-units($context))}#{$to-unit}";
   }
   @if ($to-unit=='px') {
     @return "#{_strip-units($value) * _strip-units($context)}px";
@@ -133,7 +134,7 @@ $rupture: map-merge($rupture, ( scale: 0 map-get($rupture, mobile-cutoff) 600px 
       $queries: append($queries, '(min--moz-device-pixel-ratio: #{$density})');
     }
     @else if $query=='o' {
-      $queries: append($queries, '(-o_min-device-pixel-ratio: #{$density}/1)');
+      $queries: append($queries, '(-o-min-device-pixel-ratio: #{$density}/1)');
     }
     @else if $query=='ratio' {
       $queries: append($queries, '(min-device-pixel-ratio: #{$density})');
