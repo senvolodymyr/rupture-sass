@@ -1,6 +1,8 @@
 # Rupture-sass
 Simple media queries for SASS (Rupture mixins for SASS)
 
+
+
 Write ```scss``` code as follows:
 ```scss
 .some-class {
@@ -314,5 +316,6 @@ Inspired by [Rupture](http://jescalan.github.io/rupture/) mixins lib for Stylus
 
 ### Thanks
 
-[elgandoz](https://github.com/elgandoz) for contributing
+[elgandoz](https://github.com/elgandoz)
+[Honza](https://github.com/crs1138)
 
